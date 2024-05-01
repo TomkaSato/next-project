@@ -33,7 +33,6 @@ const MainPage = () => {
   // 全データを取得して必要データのみReduxに保存
   const getData = async () => {
     try {
-      // const pokemonData = {};
       const pokemonData: pokemonDataType[] = [];
 
       for (let i = 1; i <= 151; i++) {

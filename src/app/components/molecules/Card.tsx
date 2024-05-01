@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../lib/hook";
-import { typeColors } from "src/app/utils/constants";
+import { typeColor } from "src/app/utils/constants";
 
 type Props = {
   data: object;
@@ -54,7 +54,11 @@ const Card = (props: Props) => {
           <div className="items-end flex">
             {selectedPokemonData?.types.map((type, index) => {
               return (
-                <div key={index} className={`rounded-xl py-[2px] px-2 h-fit bg-custom-${type}`}>
+                <div
+                  key={index}
+                  className="rounded-xl py-[1px] px-2 mr-[2px] h-fit"
+                  style={{ backgroundColor: typeColor(type) }}
+                >
                   <img src={`/image/${type}.svg`} alt={type} className="w-6" />
                 </div>
               );
