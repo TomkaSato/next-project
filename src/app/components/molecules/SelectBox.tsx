@@ -2,19 +2,19 @@ import React from "react";
 import { selectPokemonId } from "../../lib/features/test/pokemonSlice";
 import { useAppDispatch } from "../../lib/hook";
 
+type Option = {
+  id: number;
+  name: string;
+};
+
 type Props = {
-  option: object;
+  option: Option[];
 };
 
 const SelectBox = (props: Props) => {
   const dispatch = useAppDispatch();
   const pokemonList = props.option || [];
-
-  type Option = {
-    id: number;
-    name: string;
-  };
-
+  
   // 選択したIDをReduxに保存
   const handleChange = (e: { target: { value: any } }) => {
     dispatch(selectPokemonId(e.target.value));

@@ -19,39 +19,59 @@ const MainPage = () => {
     };
   };
 
-  type pokemonDataType = {
+  type PokemonDataType = {
     id: number;
     name: string;
     img_url: string;
     types: string[];
   };
 
+  type PokemonListType = {
+    [key: number]: PokemonDataType;
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
-  // 全データを取得して必要データのみReduxに保存
+  // 全データを取得してReduxに保存
   const getData = async () => {
     try {
-      const pokemonData: pokemonDataType[] = [];
+      const pokemonData: PokemonDataType[] = [];
+      const promises = [];
 
       for (let i = 1; i <= 151; i++) {
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
-        const speciesRes = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon-species/${i}`
-        );
-
-        const obj = {
-          id: res.data.id,
-          name: speciesRes.data.names[0].name,
-          img_url: res.data.sprites.other["official-artwork"].front_default,
-          types: res.data.types.map((item: DataType) => item.type.name),
-        };
-        pokemonData[i] = obj;
+        promises.push(fetchPokemonData(i)); // データ取得を並列で実行
       }
+      const results = await Promise.all(promises);
+
+      results.forEach((result, index) => {
+        pokemonData[index + 1] = result; // 取得したデータを配列に追加
+      });
+
       dispatch(pokemonList(pokemonData));
     } catch (error) {
-      console.error("エラー：", error);
+      console.error("getDataエラー:", error);
+    }
+  };
+
+  // 指定された番号のポケモンのデータを取得
+  const fetchPokemonData = async (i: number) => {
+    try {
+      const [res, speciesRes] = await Promise.all([
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon-species/${i}`),
+      ]);
+
+      return {
+        id: res.data.id,
+        name: speciesRes.data.names[0].name,
+        img_url: res.data.sprites.other["official-artwork"].front_default,
+        types: res.data.types.map((item: DataType) => item.type.name),
+      };
+    } catch (error) {
+      console.error("fetchPokemonDataエラー:", error);
+      throw error;
     }
   };
 
@@ -66,13 +86,13 @@ const MainPage = () => {
   };
 
   // Reduxからポケモンのデータを取得
-  const allPokemonList = useAppSelector(
+  const allPokemonList: PokemonListType = useAppSelector(
     (state) => state.pokemon.allPokemonList
   );
 
   // ポケモンのidと名前を返す
-  const selectBoxOption = Object.keys(allPokemonList).map((key) => {
-    const { id, name } = allPokemonList[key];
+  const selectBoxOption = Object.keys(allPokemonList).map((key: string) => {
+    const { id, name } = allPokemonList[parseInt(key)];
     return { id, name };
   });
 
