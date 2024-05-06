@@ -37,7 +37,7 @@ const Card = (props: Props) => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-[#9ca3af] to-[#f3f4f6] w-[350px] border rounded-xl mx-auto mt-[100px] relative">
+      <div className="bg-gradient-to-b from-[#9ca3af] to-[#f3f4f6] md:w-[350px] border rounded-xl mx-auto mt-[100px] relative w-[80%]">
         <p className="flex justify-center text-5xl font-bold text-gray-50 px-4 py-2 opacity-70 absolute">
           #{selectedPokemonData?.id}
         </p>
