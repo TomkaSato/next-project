@@ -16,10 +16,10 @@ const Button = (props: Props) => {
 
   return (
     <>
-      <div className="w-[150px] mx-auto mt-12 p-1 text-white w-[150px] rounded-[65px] bg-gradient-to-r from-[#4568dc] to-[#e9f38b] hover:bg-gradient-to-l from-[#4568dc] to-[#e9f38b]">
+      <div className="w-[150px] mx-auto p-1 text-white w-[150px] rounded-[65px] bg-gradient-to-r from-[#4568dc] to-[#e9f38b] hover:bg-gradient-to-l from-[#4568dc] to-[#e9f38b]">
         <button
           onClick={() => handleClick()}
-          className="bg-black w-full px-5 py-2 rounded-[65px]"
+          className="bg-black w-full px-5 py-[5px] rounded-[65px]"
         >
           {props.text}
         </button>
