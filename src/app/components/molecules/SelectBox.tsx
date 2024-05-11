@@ -22,7 +22,7 @@ const SelectBox = (props: Props) => {
 
   return (
     <>
-      <select onChange={handleChange} className="mt-4">
+      <select onChange={handleChange} className="mt-4 mb-5 md:mb-[50px]">
         <option>選択してください</option>
         {pokemonList.map((pokemon: Option) => (
           <option key={pokemon.id} value={pokemon.id}>
