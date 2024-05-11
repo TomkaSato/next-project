@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../lib/hook";
 import { typeColor } from "src/app/utils/constants";
@@ -28,7 +27,7 @@ const Card = (props: Props) => {
   }, [selectedId]);
 
   // 全データの中から選択されたポケモンのデータを取得
-  const fetchData = () => {
+  const fetchData = (): void => {
     const selectedPokemon = Object.values(allPokemonData).find((pokemon) => {
       return pokemon.id == selectedId;
     });

@@ -1,6 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type PokemonDataType = {
+  id: number;
+  name: string;
+  img_url: string;
+  types: string[];
+};
+
+interface InitialState {
+  allPokemonList: { [key: number]: PokemonDataType };
+  currentPokemonId: number;
+}
+
+const initialState: InitialState = {
   allPokemonList: {},
   currentPokemonId: 94, // 初期値は94:ゲンガーを指定
 };

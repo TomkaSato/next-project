@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppDispatch } from "../../lib/hook";
 import { switchButton } from "../../lib/features/test/buttonSlice";
 

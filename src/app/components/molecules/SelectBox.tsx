@@ -1,4 +1,4 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import { selectPokemonId } from "../../lib/features/test/pokemonSlice";
 import { useAppDispatch } from "../../lib/hook";
 
@@ -16,7 +16,7 @@ const SelectBox = (props: Props) => {
   const pokemonList = props.option || [];
   
   // 選択したIDをReduxに保存
-  const handleChange = (e: { target: { value: any } }) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     dispatch(selectPokemonId(e.target.value));
   };
 

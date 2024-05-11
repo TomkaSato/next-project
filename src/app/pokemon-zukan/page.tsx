@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../lib/hook";
@@ -10,7 +9,7 @@ import Card from "../components/molecules/Card";
 import SelectBox from "../components/molecules/SelectBox";
 import Button from "../components/atoms/Button";
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   type DataType = {
@@ -35,7 +34,7 @@ const MainPage = () => {
   }, []);
 
   // 全データを取得してReduxに保存
-  const getData = async () => {
+  const getData: () => Promise<void> = async () => {
     try {
       const pokemonData: PokemonDataType[] = [];
       const promises = [];
@@ -81,7 +80,7 @@ const MainPage = () => {
   );
 
   // 開始前かどうか
-  const isStart = () => {
+  const isStart: () => boolean = () => {
     return currentButtonText === "Start";
   };
 

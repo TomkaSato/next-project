@@ -1,10 +1,11 @@
-import React from "react";
-
-const Start = () => {
+const Start: React.FC = () => {
+  const domain = process.env.REACT_APP_IMAGE_URL
   return (
     <>
       <div className="mt-[100px] w-[480px] h-[450px] mx-auto">
-        <img src="https://nextjs-sample-9u6c.vercel.app//pokemon-zukan/gengar.png" />
+        <img
+          src={`${domain}/pokemon-zukan/gengar.png`}
+        />
       </div>
     </>
   );
